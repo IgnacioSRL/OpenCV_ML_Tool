@@ -11,3 +11,5 @@ $ make
 
 For more information (Spanish) please visit:
 https://drive.google.com/open?id=0B750LQZH0oaccW9IWkdpRUVQTmM
+
+![General ](https://github.com/IgnacioSRL/OpenCV_ML_Tool/blob/Bad_Coding/OpenCV_ML_Tool.png "OpenCV_ML_Tool example")

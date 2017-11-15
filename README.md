@@ -1,6 +1,7 @@
 # OpenCV_ML_Tool
+NOW THIS SOFTWARE IS PART OF JDEROBOT PROJECT. FUTURE VERSIONS WILL BE RELEASED HERE https://github.com/JdeRobot/MachineLearning-OpenCV
 
-This program tries to provide all necesary tools for visual machine learning. It uses OpenCV (contrib) and QT.
+This program provides all necesary tools for visual machine learning. It uses OpenCV (contrib) and QT.
 
 # Installation:
 ```sh

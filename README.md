@@ -13,4 +13,4 @@ $ make
 For more information (Spanish) please visit:
 https://drive.google.com/open?id=0B750LQZH0oaccW9IWkdpRUVQTmM
 
-![General ](https://github.com/IgnacioSRL/OpenCV_ML_Tool/OpenCV_ML_Tool.png "OpenCV_ML_Tool example")
+![General ](https://github.com/IgnacioSRL/OpenCV_ML_Tool/blob/master/OpenCV_ML_Tool.png "OpenCV_ML_Tool example")

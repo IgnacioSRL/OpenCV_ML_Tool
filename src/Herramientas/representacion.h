@@ -26,8 +26,8 @@
 
 #include <iostream>
 #include <opencv2/opencv.hpp>
-#include <Herramientas/auxiliares.h>
-#include <Herramientas/analisis.h>
+#include "auxiliares.h"
+#include "analisis.h"
 #ifdef GUI
 #include <QApplication>
 #endif
@@ -48,7 +48,7 @@ class Representacion
         int Data_Ellipse_represent(string nombre,vector<Mat> Data, vector<float> labels, vector<int> dimensions, vector<cv::Scalar> Colores);
         int Continuous_data_represent(string nombre,Mat Data, vector<float> labels, vector<cv::Scalar> Colores);
         int Histogram_represent(string nombre, vector<vector<Mat> > Histograma, vector<cv::Scalar> Colores, int dimension);
-        int Imagen(vector<Mat> Imagenes, int numero);
+        int Imagen(vector<Mat> Imagenes, vector<float> etiquetas, int etiqueta);
     };
 }
 

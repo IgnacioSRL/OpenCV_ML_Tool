@@ -1,26 +1,3 @@
-/*
-*
-* Copyright 2014-2016 Ignacio San Roman Lana
-*
-* This file is part of OpenCV_ML_Tool
-*
-* OpenCV_ML_Tool is free software: you can redistribute it and/or
-* modify it under the terms of the GNU General Public License as
-* published by the Free Software Foundation, either version 3 of the
-* License, or (at your option) any later version.
-*
-* OpenCV_ML_Tool is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-* General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with OpenCV_ML_Tool. If not, see http://www.gnu.org/licenses/.
-*
-* For those usages not covered by this license please contact with
-* isanromanlana@gmail.com
-*/
-
 #include "clasificador_em.h"
 
 MLT::Clasificador_EM::Clasificador_EM(string Nombre, int nclusters, int covMatType){
@@ -180,11 +157,13 @@ int MLT::Clasificador_EM::Autotrain(vector<Mat> Data, vector<float> Labels, Dime
 }
 
 int MLT::Clasificador_EM::Autoclasificacion(vector<Mat> Data, vector<float> &Labels, bool reducir, bool read){
+    this->running=true;
     int e=0;
     if(read){
         e=Read_Data();
         if(e==1){
             cout<<"ERROR en Autoclasificacion: Error en Read_Data"<<endl;
+            this->running=false;
             return 1;
         }
     }
@@ -193,6 +172,7 @@ int MLT::Clasificador_EM::Autoclasificacion(vector<Mat> Data, vector<float> &Lab
     e=ax.Image2Lexic(Data,lexic_data);
     if(e==1){
         cout<<"ERROR en Autoclasificacion: Error en Image2Lexic"<<endl;
+        this->running=false;
         return 1;
     }
     Mat trainingDataMat;
@@ -203,6 +183,7 @@ int MLT::Clasificador_EM::Autoclasificacion(vector<Mat> Data, vector<float> &Lab
             e=dim.Proyeccion(lexic_data,Proyectada,LDA_DIM,reduccion.LDA);
             if(e==1){
                 cout<<"ERROR en Autoclasificacion: Error en Proyeccion"<<endl;
+                this->running=false;
                 return 1;
             }
             Proyectada.copyTo(trainingDataMat);
@@ -213,6 +194,7 @@ int MLT::Clasificador_EM::Autoclasificacion(vector<Mat> Data, vector<float> &Lab
             e=dim.Proyeccion(lexic_data,Proyectada,PCA_DIM,reduccion.PCA);
             if(e==1){
                 cout<<"ERROR en Autoclasificacion: Error en Proyeccion"<<endl;
+                this->running=false;
                 return 1;
             }
             Proyectada.copyTo(trainingDataMat);
@@ -223,6 +205,7 @@ int MLT::Clasificador_EM::Autoclasificacion(vector<Mat> Data, vector<float> &Lab
             e=dim.Proyeccion(lexic_data,Proyectada,MAXDIST_DIM,reduccion.DS);
             if(e==1){
                 cout<<"ERROR en Autoclasificacion: Error en Proyeccion"<<endl;
+                this->running=false;
                 return 1;
             }
             Proyectada.copyTo(trainingDataMat);
@@ -233,6 +216,7 @@ int MLT::Clasificador_EM::Autoclasificacion(vector<Mat> Data, vector<float> &Lab
             e=dim.Proyeccion(lexic_data,Proyectada,D_PRIME_DIM,reduccion.D_PRIME);
             if(e==1){
                 cout<<"ERROR en Autoclasificacion: Error en Proyeccion"<<endl;
+                this->running=false;
                 return 1;
             }
             Proyectada.copyTo(trainingDataMat);
@@ -247,9 +231,10 @@ int MLT::Clasificador_EM::Autoclasificacion(vector<Mat> Data, vector<float> &Lab
         Labels.push_back(response);
 #ifdef GUI
             progreso++;
-            window->progress_Clasificar->setValue(base_progreso+(max_progreso*progreso/total_progreso));
+//            window->progress_Clasificar->setValue(base_progreso+(max_progreso*progreso/total_progreso));
 #endif
     }
+    this->running=false;
     return 0;
 }
 
@@ -295,7 +280,7 @@ int MLT::Clasificador_EM::Save_Data(){
         }
     }
     string g="../Data/Configuracion/"+nombre+"/EXP_MAX2.xml";
-    cv::FileStorage archivo_w(g,CV_STORAGE_WRITE);
+    cv::FileStorage archivo_w(g,FileStorage::WRITE);
     if(archivo_w.isOpened()){
         archivo_w<<"ventana_x"<<ventana_x;
         archivo_w<<"ventana_y"<<ventana_y;
@@ -315,14 +300,14 @@ int MLT::Clasificador_EM::Save_Data(){
         return 1;
     archivo_w.release();
     g="../Data/Configuracion/"+nombre+"/EXP_MAX.xml";
-    cv::FileStorage archivo_w2(g,CV_STORAGE_WRITE);
+    cv::FileStorage archivo_w2(g,FileStorage::WRITE);
     if(archivo_w2.isOpened())
         EXP_M->write(archivo_w2);
     else
         return 1;
     archivo_w2.release();
     g="../Data/Configuracion/"+nombre+"/Clasificador.xml";
-    cv::FileStorage clas(g,CV_STORAGE_WRITE);
+    cv::FileStorage clas(g,FileStorage::WRITE);
     if(clas.isOpened()){
         int id=EXP_MAX;
         clas<<"Tipo"<<id;
@@ -335,7 +320,7 @@ int MLT::Clasificador_EM::Save_Data(){
 
 int MLT::Clasificador_EM::Read_Data(){
     string g="../Data/Configuracion/"+nombre+"/EXP_MAX2.xml";
-    cv::FileStorage archivo_r(g,CV_STORAGE_READ);
+    cv::FileStorage archivo_r(g,FileStorage::READ);
     if(archivo_r.isOpened()){
         archivo_r["ventana_x"]>>ventana_x;
         archivo_r["ventana_y"]>>ventana_y;

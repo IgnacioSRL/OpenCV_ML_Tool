@@ -27,8 +27,8 @@
 #include <QMainWindow>
 #include <QFileDialog>
 #include <QMessageBox>
-#include "gui/mainwindow.h"
-#include "Clasificadores/multiclasificador.h"
+#include "mainwindow.h"
+#include "../Clasificadores/multiclasificador.h"
 
 using namespace MLT;
 
@@ -61,7 +61,6 @@ private slots:
 private:
     Ui::Conf_Multi *ui;
     MultiClasificador::Multi_type multi;
-    vector<int> id_clasificadores;
     stringstream texto;
     void *punt;
 };

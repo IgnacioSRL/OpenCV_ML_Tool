@@ -1,16 +1,20 @@
 # OpenCV_ML_Tool
-NOW THIS SOFTWARE IS PART OF JDEROBOT PROJECT. FUTURE VERSIONS WILL BE RELEASED HERE https://github.com/JdeRobot/MachineLearning-OpenCV
-
-This program provides all necesary tools for visual machine learning. It uses OpenCV (contrib) and QT.
+This tool provides an application to test different Machine Learning algorithms over images (except DeepLearning): feature points, clustering, classification.... It uses OpenCV library functions. 
 
 # Installation:
+cv-MachineLearning uses OpenCV and OpenCV_contrib libraries:
+https://github.com/opencv/opencv
+https://github.com/opencv/opencv_contrib
+
+Besides it is necessary to install QT libraries.
+For a correct performance it is necessary to build OpenCV library with Qt Backend support.
+
 ```sh
-$ cd OpenCV_ML_Tool/src
-$ qmake .
+$ mkdir build
+$ cd build
+$ cmake ..
 $ make
 ```
 
 For more information (Spanish) please visit:
 https://drive.google.com/open?id=0B750LQZH0oaccW9IWkdpRUVQTmM
-
-![General ](https://github.com/IgnacioSRL/OpenCV_ML_Tool/blob/master/OpenCV_ML_Tool.png "OpenCV_ML_Tool example")

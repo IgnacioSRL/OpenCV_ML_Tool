@@ -25,8 +25,8 @@
 #define DIMENSIONALIDAD_H
 
 #include <opencv2/opencv.hpp>
-#include <Herramientas/auxiliares.h>
-#include <Herramientas/generacion.h>
+#include "auxiliares.h"
+#include "generacion.h"
 
 using namespace std;
 using namespace cv;
@@ -79,6 +79,13 @@ namespace MLT {
         int Calidad_dimensiones_d_prime(vector<Mat> img, vector<float> Etiquetas, int tipo_reduccion, int dim_max, Mat &Separabilidad, Mat &Separabilidad_acumulada, int &dim_optim);
 
         string nombre;
+
+#ifdef GUI
+    int progreso;
+    int total_progreso;
+    int error;
+    bool running;
+#endif
     };
 }
 

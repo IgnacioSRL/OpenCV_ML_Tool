@@ -2,7 +2,7 @@
 This tool provides an application to test different Machine Learning algorithms over images (except DeepLearning): feature points, clustering, classification.... It uses OpenCV library functions. 
 
 # Installation:
-cv-MachineLearning uses OpenCV and OpenCV_contrib libraries:
+OpenCV_ML_Tool uses OpenCV and OpenCV_contrib libraries:
 https://github.com/opencv/opencv
 https://github.com/opencv/opencv_contrib
 
